@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import Header from './components/header/Header';
 import Sidebar from './components/sidebar/Sidebar';
 import HomeScreen from './screens/homeScreen/HomeScreen';
 import LoginScreen from './screens/loginScreen/LoginScreen';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import './_app.scss';
+import { useSelector } from 'react-redux';
 
 const Layout = ({ children }) => {
   const [sidebar, toggleSidebar] = useState(false);
@@ -28,35 +25,31 @@ const Layout = ({ children }) => {
   );
 };
 const App = () => {
+  const { accessToken, loading } = useSelector((state) => state.auth);
+  const history = useHistory();
+  useEffect(() => {
+    if (!loading && !accessToken) {
+      history.push('/auth');
+    }
+  }, [accessToken, loading, history]);
   return (
-    // <>
-    //   <Header handleToggleSidebar={handleToggleSidebar} />
-    //   <div className='app__container border border-info'>
-    //     <Sidebar sidebar={sidebar} handleToggleSidebar={handleToggleSidebar} />
-    //     <Container fluid className='app__main border border-warning'>
-    //       <HomeScreen />
-    //     </Container>
-    //   </div>
-    // </>
-    <Router>
-      <Switch>
-        <Route path='/' exact>
-          <Layout>
-            <HomeScreen />
-          </Layout>
-        </Route>
-        <Route path='/auth'>
-          <LoginScreen />
-        </Route>
-        <Route path='/search'>
-          <h1>Search</h1>
-        </Route>
+    <Switch>
+      <Route path='/' exact>
+        <Layout>
+          <HomeScreen />
+        </Layout>
+      </Route>
+      <Route path='/auth'>
+        <LoginScreen />
+      </Route>
+      <Route path='/search'>
+        <h1>Search</h1>
+      </Route>
 
-        <Route>
-          <Redirect to='/' />
-        </Route>
-      </Switch>
-    </Router>
+      <Route>
+        <Redirect to='/' />
+      </Route>
+    </Switch>
   );
 };
 
