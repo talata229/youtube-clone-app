@@ -15,6 +15,8 @@ export const login = () => async (dispatch) => {
       type: LOGIN_REQUEST,
     });
     const provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/youtube.force-ssl');
+    
     const res = await auth.signInWithPopup(provider);
     const accessToken = res.credential.accessToken;
     // console.log(res);
@@ -49,7 +51,7 @@ export const log_out = () => async (dispatch) => {
     dispatch({
       type: LOG_OUT,
     });
-   
+
     sessionStorage.removeItem('ytc-access-token');
     sessionStorage.removeItem('ytc-user');
   } catch (error) {
