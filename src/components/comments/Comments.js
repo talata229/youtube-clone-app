@@ -1,8 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './_comments.scss';
 import Comment from '../comment/Comment';
-const Comments = () => {
-  const hanldeSubmit = () => {};
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  addComment,
+  getCommentsOfVideoById,
+} from '../../redux/actions/comments.action';
+const Comments = ({ videoId }) => {
+  const dispatch = useDispatch();
+  const [text, setText] = useState('');
+  useEffect(() => {
+    dispatch(getCommentsOfVideoById(videoId));
+  }, [dispatch, videoId]);
+
+  const comments = useSelector((state) => state.commentList.comments);
+  const _comments = comments?.map(
+    (comment) => comment.snippet.topLevelComment.snippet
+  );
+  const hanldeSubmit = (e) => {
+    e.preventDefault();
+    if (text.length == 0) return;
+    dispatch(addComment(videoId, text));
+  };
+
   return (
     <div className='comments'>
       <p>1234 comments</p>
@@ -20,14 +40,16 @@ const Comments = () => {
             type='text'
             className='flex-grow-1'
             placeholder='Write a comment'
+            value={text}
+            onChange={(e) => setText(e.target.value)}
           />
           <button className='border-0 p-2'>Comment</button>
         </form>
       </div>
 
       <div className='comments__list'>
-        {[...Array(15)].map(() => (
-          <Comment />
+        {_comments?.map((comment, i) => (
+          <Comment key={i} comment={comment} />
         ))}
       </div>
     </div>

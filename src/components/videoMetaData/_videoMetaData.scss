@@ -21,7 +21,9 @@
       border-radius: none;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-
+      &.btn-gray {
+        background: gray;
+      }
       &:hover {
         color: #fff;
       }
@@ -33,15 +35,15 @@
   }
 
   &__description {
-      font-size: 0.9rem;
-      white-space: pre-line;
-      border-bottom: 0.2px solid $border-color;
-      .showMoreText {
-          text-decoration: none;
-          display: block;
-          margin: 1rem 0;
-          color: #fff;
-          font-weight: 500;
-      }
+    font-size: 0.9rem;
+    white-space: pre-line;
+    border-bottom: 0.2px solid $border-color;
+    .showMoreText {
+      text-decoration: none;
+      display: block;
+      margin: 1rem 0;
+      color: #fff;
+      font-weight: 500;
+    }
   }
 }

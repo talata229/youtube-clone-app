@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import CategoriesBar from '../../components/categoriesBar/CategoriesBar';
 import Video from '../../components/video/Video';
@@ -8,7 +8,6 @@ import {
   getVideosByCategory,
 } from '../../redux/actions/videos.action';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Skeleton from 'react-loading-skeleton';
 import SkeletonVideo from '../../components/skeleton/SkeletonVideo';
 
 const HomeScreen = () => {
