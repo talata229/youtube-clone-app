@@ -41,12 +41,12 @@
 @media (max-width: $breakpoint-medium) {
   .sidebar {
     width: 90px;
-  }
-  li {
-    justify-content: center;
-  }
-  span {
-    display: none;
+    li {
+      justify-content: center;
+    }
+    span {
+      display: none;
+    }
   }
 }
 
