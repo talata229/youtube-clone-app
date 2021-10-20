@@ -12,6 +12,7 @@ import WatchScreen from './screens/watchScreen/WatchScreen';
 import SearchScreen from './screens/SearchScreen';
 import SubscriptionsScreen from './screens/subscriptionsScreen/SubscriptionsScreen';
 import ChannelScreen from './screens/channelScreen/ChannelScreen';
+import VideoCategoryScreen from './screens/videoCategoryScreen/VideoCategoryScreen';
 
 const Layout = ({ children }) => {
   const [sidebar, toggleSidebar] = useState(false);
@@ -74,6 +75,13 @@ const App = () => {
           <ChannelScreen />
         </Layout>
       </Route>
+
+      <Route path='/video-category'>
+        <Layout>
+          <VideoCategoryScreen />
+        </Layout>
+      </Route>
+
 
       <Route>
         <Redirect to='/' />

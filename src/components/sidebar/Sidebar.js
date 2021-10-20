@@ -48,10 +48,12 @@ const Sidebar = ({ sidebar, handleToggleSidebar }) => {
         <MdLibraryBooks size={23} />
         <span>Library</span>
       </li>
-      <li>
-        <MdSentimentDissatisfied size={23} />
-        <span>I dont know</span>
-      </li>
+      <Link to='video-category'>
+        <li>
+          <MdSentimentDissatisfied size={23} />
+          <span>Video Category</span>
+        </li>
+      </Link>
       <hr />
       <li onClick={handleLogout}>
         <MdExitToApp size={23} />
