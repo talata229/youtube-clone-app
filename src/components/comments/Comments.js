@@ -6,7 +6,8 @@ import {
   addComment,
   getCommentsOfVideoById,
 } from '../../redux/actions/comments.action';
-const Comments = ({ videoId }) => {
+
+const Comments = ({ videoId,totalComments }) => {
   const dispatch = useDispatch();
   const [text, setText] = useState('');
   useEffect(() => {
@@ -25,7 +26,7 @@ const Comments = ({ videoId }) => {
 
   return (
     <div className='comments'>
-      <p>1234 comments</p>
+      <p>{totalComments} comments</p>
       <div className='comments_form d-flex w-100 my-2'>
         <img
           src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuoovVYEMl5PlyrnrmjPY_0bH_k0RaXYByiMVOWeEhWeG9wxWP2ozVw0Ab51hiQzxErpo&usqp=CAU'

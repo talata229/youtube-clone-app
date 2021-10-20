@@ -9,6 +9,9 @@ import { useHistory } from 'react-router';
 import './_app.scss';
 import { useSelector } from 'react-redux';
 import WatchScreen from './screens/watchScreen/WatchScreen';
+import SearchScreen from './screens/SearchScreen';
+import SubscriptionsScreen from './screens/subscriptionsScreen/SubscriptionsScreen';
+import ChannelScreen from './screens/channelScreen/ChannelScreen';
 
 const Layout = ({ children }) => {
   const [sidebar, toggleSidebar] = useState(false);
@@ -27,15 +30,15 @@ const Layout = ({ children }) => {
 };
 const App = () => {
   const { accessToken, loading } = useSelector((state) => state.auth);
-  
+
   const history = useHistory();
-  
+
   useEffect(() => {
     if (!loading && !accessToken) {
       history.push('/auth');
     }
   }, [accessToken, loading, history]);
-  
+
   return (
     <Switch>
       <Route path='/' exact>
@@ -48,13 +51,27 @@ const App = () => {
         <LoginScreen />
       </Route>
 
-      <Route path='/search'>
-        <h1>Search</h1>
+      <Route path='/search/:query'>
+        <Layout>
+          <SearchScreen />
+        </Layout>
       </Route>
 
       <Route path='/watch/:id'>
         <Layout>
           <WatchScreen />
+        </Layout>
+      </Route>
+
+      <Route path='/feed/subscriptions'>
+        <Layout>
+          <SubscriptionsScreen />
+        </Layout>
+      </Route>
+
+      <Route path='/channel/:channelId'>
+        <Layout>
+          <ChannelScreen />
         </Layout>
       </Route>
 

@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './_header.scss';
 import { FaBars } from 'react-icons/fa';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { MdNotifications, MdApps } from 'react-icons/md';
+import { useHistory } from 'react-router';
+import { useSelector } from 'react-redux';
 
 const Header = ({ handleToggleSidebar }) => {
+  const [input, setInput] = useState('');
+  const history = useHistory();
+ 
+  const user = useSelector(state=>state.auth?.user)
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    history.push(`/search/${input}`);
+  };
+  
   return (
-    <div className='border border-dark header'>
+    <div className='header'>
       <FaBars
         className='header__menu'
         size={26}
@@ -17,8 +29,13 @@ const Header = ({ handleToggleSidebar }) => {
         alt=''
         className='header__logo'
       />
-      <form>
-        <input type='text' placeholder='Search' />
+      <form onSubmit={handleSubmit}>
+        <input
+          type='text'
+          placeholder='Search'
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
         <button type='submit'>
           <AiOutlineSearch size={22} />
         </button>
@@ -28,7 +45,7 @@ const Header = ({ handleToggleSidebar }) => {
         <MdNotifications size={28} />
         <MdApps size={28} />
         <img
-          src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuoovVYEMl5PlyrnrmjPY_0bH_k0RaXYByiMVOWeEhWeG9wxWP2ozVw0Ab51hiQzxErpo&usqp=CAU'
+          src={user?.photoURL}
           alt='avatar'
         />
       </div>
