@@ -2,6 +2,9 @@ import {
   CHANNEL_VIDEOS_FAIL,
   CHANNEL_VIDEOS_REQUEST,
   CHANNEL_VIDEOS_SUCCESS,
+  GET_LIST_VIDEO_CATEGORY_FAIL,
+  GET_LIST_VIDEO_CATEGORY_REQUEST,
+  GET_LIST_VIDEO_CATEGORY_SUCCESS,
   HOME_VIDEOS_FAIL,
   HOME_VIDEOS_REQUEST,
   HOME_VIDEOS_SUCCESS,
@@ -123,8 +126,6 @@ export const relatedVideosReducer = (
   }
 };
 
-
-
 export const searchedVideosReducer = (
   state = {
     loading: true,
@@ -212,6 +213,38 @@ export const channelVideosReducer = (
         ...state,
         loading: false,
         error: payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export const videoCategoriesReducer = (
+  state = {
+    loading: true,
+    categories: [],
+  },
+  action
+) => {
+  const { type, payload } = action;
+  switch (type) {
+    case GET_LIST_VIDEO_CATEGORY_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GET_LIST_VIDEO_CATEGORY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        categories: payload,
+      };
+    case GET_LIST_VIDEO_CATEGORY_FAIL:
+      return {
+        ...state,
+        loading: false,
+        categories: [],
+        error:payload
       };
     default:
       return state;

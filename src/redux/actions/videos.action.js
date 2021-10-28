@@ -2,6 +2,9 @@ import {
   CHANNEL_VIDEOS_FAIL,
   CHANNEL_VIDEOS_REQUEST,
   CHANNEL_VIDEOS_SUCCESS,
+  GET_LIST_VIDEO_CATEGORY_FAIL,
+  GET_LIST_VIDEO_CATEGORY_REQUEST,
+  GET_LIST_VIDEO_CATEGORY_SUCCESS,
   HOME_VIDEOS_FAIL,
   HOME_VIDEOS_REQUEST,
   HOME_VIDEOS_SUCCESS,
@@ -156,7 +159,7 @@ export const getSubcribedChannels = () => async (dispatch, getState) => {
       params: {
         part: 'snippet,contentDetails',
         mine: true,
-        maxResults: 10
+        maxResults: 10,
       },
       headers: {
         Authorization: `Bearer ${getState().auth.accessToken}`,
@@ -207,6 +210,31 @@ export const getVideosByChannel = (id) => async (dispatch) => {
     console.log(error.response.data);
     dispatch({
       type: CHANNEL_VIDEOS_FAIL,
+      payload: error,
+    });
+  }
+};
+
+export const getListVideoCategory = () => async (dispatch) => {
+  try {
+    dispatch({ type: GET_LIST_VIDEO_CATEGORY_REQUEST });
+    const { data } = await request('/videoCategories', {
+      params: {
+        part: 'snippet',
+        regionCode: 'VN',
+        hl: 'vi_VN',
+      },
+    });
+    
+    console.log("🚀 ~ file: videos.action.js ~ line 222 ~ getListVideoCategory ~ data", data)
+    dispatch({
+      type: GET_LIST_VIDEO_CATEGORY_SUCCESS,
+      payload: data.items,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: GET_LIST_VIDEO_CATEGORY_FAIL,
       payload: error,
     });
   }

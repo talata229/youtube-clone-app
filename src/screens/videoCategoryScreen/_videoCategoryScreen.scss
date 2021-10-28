@@ -1,0 +1,24 @@
+@import '../../_base.scss';
+
+.video-category-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: start;
+
+
+  &__item {
+    margin: 10px;
+    border: 0.5px solid #fff;
+    border-radius: 20px;
+    min-width: 100px;
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+        background-color: $border-color;
+        color:#fff;
+    }
+  }
+}

@@ -4,7 +4,15 @@ import thunk from 'redux-thunk';
 import { authReducer } from './reducers/auth.reducer';
 import { channelDetailsReducer } from './reducers/channel.reducer';
 import { commentListReducer } from './reducers/commentList.reducer';
-import { channelVideosReducer, homeVideosReducer, relatedVideosReducer, searchedVideosReducer, selectedVideoReducer, subscriptionsChannelReducer } from './reducers/video.reducer';
+import {
+  channelVideosReducer,
+  homeVideosReducer,
+  relatedVideosReducer,
+  searchedVideosReducer,
+  selectedVideoReducer,
+  subscriptionsChannelReducer,
+  videoCategoriesReducer,
+} from './reducers/video.reducer';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -16,6 +24,7 @@ const rootReducer = combineReducers({
   searchedVideos: searchedVideosReducer,
   subscriptionsChannel: subscriptionsChannelReducer,
   channelVideos: channelVideosReducer,
+  videoCategories: videoCategoriesReducer,
 });
 
 const store = createStore(
